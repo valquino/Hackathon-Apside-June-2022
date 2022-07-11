@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+{% include '/layouts/_navAdmin.html.twig' %}
+
+<div class="container col-8">
+    <h2 class="text-center mb-4">Liste des agences</h2>
+    <div class="d-flex justify-content-evenly mb-4 mt-3">
+        {% if (app.request.get('_route') == 'app_agency_new') or (app.request.get('_route') == 'app_agency_edit') %}
+        <div>{% include '/agency/_form.html.twig' %}</div>
+        {% endif %}
+        <a href="{{ path('app_agency_new') }}" class="btn btn-light d-flex align-items-center gap-2"><i class="bi bi-plus-circle"
+                style="font-size: 1rem;"></i><span>Ajouter une agence</span></a>
+    </div>
+    <table class="table h-auto">
+        <thead>
+            <tr>
+                <th class="ps-5 align-middle col-1">#</th>
+                <th class="align-middle col-1">Nom</th>
+                <th class="align-middle col-1">Employés</th>
+                <th class="align-middle col-1">Projets</th>
+                <th class="text-center align-middle col-1">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for agency in agencies %}
+            <tr>
+                <td class="ps-5 align-middle">{{ loop.index }}</th>
+                <td class="align-middle">{{ agency.name }}</td>
+                <td class="align-middle"><a href="{{ path('app_user_index') }}">voir la liste</a></td>
+                <td class="align-middle"><a href="{{ path('app_all_projects')}}">voir la liste</a></td>
+                <td class="align-middle">
+                    <div class=" d-flex justify-content-center gap-2">
+                        <a href="{{ path('app_agency_edit', { id : agency.id }) }}" class="btn btn-warning" type="button">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        {% include 'agency/_delete_form.html.twig' %}
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

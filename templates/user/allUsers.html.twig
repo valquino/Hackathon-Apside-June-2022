@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <h1>Liste des collaborateurs</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+              <th>Prénom</th>
+                <th>Nom</th>
+                <th>Agence</th>
+                <th>Email</th>
+                <th>Disponibilité</th>
+                <th>Statut</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+              <td>{{ user.firstname }}</td>
+              <td>{{ user.lastname }}</td>
+              <td>{{ user.agency.name }}</td>
+              <td>{{ user.email }}</td>
+              {% if user.isAvailable == 'Yes' %}
+                <td>Oui</td>
+                {% else %}
+                <td>Non</td>
+              {% endif %}         
+              {% if user.isAdmin == 'Yes' %}
+                <td>Administrateur</td>
+                {% else %}
+                <td>/</td>
+              {% endif %}          
+                <td>
+                    <a class="btn btn-primary" href="{{ path('app_user_show', {'id': user.id}) }}">Détails</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

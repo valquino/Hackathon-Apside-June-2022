@@ -1,0 +1,55 @@
+<div class="container">
+    <h1 class="h1 mt-3">Tableau de bord</h1>
+    <ul class="nav nav-pills nav-justified mt-4">
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <li class="nav-item">
+                {% if (app.request.get('_route') == 'app_agency_index') or (app.request.get('_route') == 'app_agency_new') or (app.request.get('_route') == 'app_agency_edit') %}
+                    <a class="btn btn-dark" href="{{ path('app_agency_index') }}">
+                {% else %}
+                    <a class="btn" href="{{ path('app_agency_index') }}">
+                {% endif %}
+                    Agences
+                </a>
+            </li>
+        {% endif %}
+        <li class="nav-item">
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+            {% if app.request.get('_route') == 'app_user_admin' %}
+                <a class="btn btn-dark" href="{{ path('app_user_admin') }}">
+            {% else %}
+                <a class="btn" href="{{ path('app_user_admin') }}">
+            {% endif %}
+                    Employés
+                </a>
+            {% elseif is_granted('ROLE_ADMIN') %}
+                {% if app.request.get('_route') == 'app_user_dashboard' %}
+                <a class="btn btn-dark" href="{{ path('app_user_dashboard') }}">
+            {% else %}
+                <a class="btn" href="{{ path('app_user_dashboard') }}">
+            {% endif %}
+                    Employés
+                </a>
+            {% endif %}
+        </li>
+        <li class="nav-item">
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+            {% if app.request.get('_route') == 'app_projects_admin' %}
+                <a class="btn btn-dark" href="{{ path('app_projects_admin') }}">
+            {% else %}
+                <a class="btn" href="{{ path('app_projects_admin') }}">
+            {% endif %}
+                    Projets
+                </a>
+            {% elseif is_granted('ROLE_ADMIN') %}
+            {% if app.request.get('_route') == 'app_projects_dashboard' %}
+                <a class="btn btn-dark" href="{{ path('app_projects_dashboard')}}">
+            {% else %}
+                <a class="btn" href="{{ path('app_projects_dashboard')}}">
+            {% endif %}
+                    Projets
+                </a>
+            {% endif %}
+        </li>
+    </ul>
+    <hr>
+</div>

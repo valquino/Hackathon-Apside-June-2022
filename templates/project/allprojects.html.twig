@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projects
+{% endblock %}
+
+{% block body %}
+		{% if app.request.get('_route') == 'app_all_projects' %}
+		<h1 class="my-4 text-center">Tous les projets</h1>
+		{% elseif app.request.get('_route') == 'app_project_index' %}
+		<h1 class="my-4 text-center">Mes projets</h1>
+		{% endif %}
+		<a class="btn btn-success" href="{{ path('app_project_new') }}">Créer un projet</a>
+		<div class="d-flex flex-wrap">
+			{% for project in projects|sort((a, b) => b.createdAt|date('Y-m-d H:i:s') <=> a.createdAt|date('Y-m-d H:i:s')) %}
+				{% include 'layouts/_project-card.html.twig' %}
+			{% endfor %}
+		</div>
+{% endblock %}

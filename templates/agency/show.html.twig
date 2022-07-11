@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Agence{% endblock %}
+
+{% block body %}
+    <h1>Agence</h1>
+
+<div
+	class="card m-3 all-project-cards" style="width: 18rem;">
+<div class="card-body">
+    <div class="d-flex justify-content-center">
+		<h5 class="card-title text-center">{{ agency.name }}</h5>
+	</div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <a href="{{ path('app_agency_index') }}">back to list</a>
+    </div>
+
+     <div class="d-flex justify-content-center">
+        <a href="{{ path('app_agency_edit', {'id': agency.id}) }}">edit</a>
+    </div>
+
+     <div class="d-flex justify-content-center">
+        {{ include('agency/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

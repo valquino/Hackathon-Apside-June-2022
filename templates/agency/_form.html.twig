@@ -1,0 +1,13 @@
+{{ form_start(form) }}
+    <div class="d-flex justify-content-start align-items-center gap-1">
+        {{ form_label(form.name, 'Nom') }}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        <div>
+            {% if app.request.get('_route') == 'app_agency_new' %}
+            <button class="btn btn-outline-secondary" type="submit">Ajouter</button>
+            {% elseif app.request.get('_route') == 'app_agency_edit' %}
+            <button class="btn btn-outline-secondary" type="submit">Editer</button>
+            {% endif %}
+        </div>
+    </div>
+{{ form_end(form) }}

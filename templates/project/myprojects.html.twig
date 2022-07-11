@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %} {% block title %}Project index{% endblock %} {%
+block body %}
+<h1>Project index</h1>
+
+<a class="btn btn-success" href="{{ path('app_project_new') }}">Créer un projet</a>
+<div class="row col-9 d-flex mx-auto justify-content-around">
+  {% for project in projects|sort((a, b) => b.createdAt|date('Y-m-d H:i:s') <=> a.createdAt|date('Y-m-d H:i:s')) %}
+
+  <div class="card border-dark mb-3 px-0" style="width: 25rem">
+    <div class="card-header d-flex">
+      <img
+        class="image-project"
+        src="/build/images/logo-apside-bleu.png"
+        alt="logo"
+      />
+    </div>
+    <div class="card-body text-dark">
+      <h5 class="card-title">{{ project.name }}</h5>
+      <p class="card-text">{{ project.customer ? project.customer.referentName : "" }}</p>
+      <p class="card-text">{{ project.controlPoint.name }}</p>
+      {% for category in project.category %}
+        {{ category.name }}
+      {% endfor %}
+      <p class="card-text">{{ project.method.name }}</p>
+      {% for stack in project.stacks %}
+        {{ stack.name }}
+      {% endfor %}
+      <p class="card-text">{{ project.description }}</p>
+      
+      <button type="button" class="btn btn-primary">Détails</button>
+      <a class="btn btn-warning" href="{{ path('app_project_edit', {id:project.id}) }}">Modifier</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+<div
+	class="card m-3 all-project-cards" style="width: 18rem;">
+	{# <img src="{{ project.customer.logo }}" class="card-img-top" alt="..."> #}
+	<div class="card-body">
+		<h5 class="card-title text-center">{{ agency.name }}</h5>
+	</div>
+	<div class="card-body text-center">
+		<a href="{{ path('app_agency_show', {'id': agency.id}) }}" class="card-link">Plus d'infos</a>
+	</div>
+</div>

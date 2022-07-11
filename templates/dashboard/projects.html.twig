@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+{% include '/layouts/_navAdmin.html.twig' %}
+
+<div class="container col-9">
+    <h2 class="text-center">Liste des projets</h2>
+    <div class="d-flex justify-content-between mb-4 mt-3">
+        <form method="GET" action="#" class="d-flex">
+            <input class="form-control me-2" id="keywords" name="keywords" type="search" placeholder="mot clé" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Recherche</button>
+        </form>
+    </div>
+    <table class="table h-auto">
+        <thead>
+            <tr>
+                <th class="text-left align-middle col-1 ps-5">#</th>
+                <th class="text-left align-middle col-1">Agence</th>
+                <th class="text-left align-middle col-1">Nom</th>
+                <th class="text-left align-middle col-1">Référent</th>
+                <th class="text-center align-middle col-1">Collaborateurs</th>
+                <th class="text-center align-middle col-1">Status</th>
+                <th class="text-center align-middle col-1">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projects %}
+            <tr>
+                <td class="text-left align-middle ps-5">{{ loop.index }}</th>
+                <td class="text-left align-middle">{{ project.agency ? project.agency.name : "" }}</td>
+                <td class="text-left align-middle">{{ project.name }}</td>
+                <td class="text-left align-middle">{{ project.customer.companyName }}</td>
+                <td class="text-center align-middle"><a href="#">voir la liste</a></td>
+                <td class="text-center align-middle">{{ project.controlPoint.name }}</td>
+                <td class="text-center align-middle">
+                    <div class=" d-flex justify-content-center gap-2">
+                    <a href="#" class="btn btn-warning" type="button"><i
+                            class="bi bi-pencil-square"></i></a>
+                        </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

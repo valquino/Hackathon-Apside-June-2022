@@ -1,0 +1,79 @@
+.color-principal-orange {
+    color: rgb(232, 151, 89);
+}
+
+.color-red {
+    color: #990000;
+}
+
+input[readonly],
+input[disabled],
+select:disabled {
+    background-color: #eee !important;
+    color: #777 !important;
+    border: 0px;
+}
+
+option:hover,
+option:focus,
+option:active,
+option:checked 
+{
+    background-color: rgb(232, 151, 89);
+    color: #ccc;
+}
+
+hr {
+    color: #bbb;
+}
+
+.border-right {
+    border-right: 0.5px solid #ccc !important;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
+}
+
+.profile-button {
+    background: rgb(99, 39, 120);
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #682773
+}
+
+.profile-button:focus {
+    background: #682773;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #682773;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}
+
+.available {
+    border: 1px solid rgb(232, 151, 89);
+    padding: 3px;
+}
+.noavailable {
+    border: 1px solid #990000;
+    padding: 3px;
+}
+
+.smalltext {
+    font-size: 0.8rem;
+}

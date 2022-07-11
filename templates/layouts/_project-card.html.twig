@@ -1,0 +1,28 @@
+<div
+	class="card m-3 all-project-cards" style="width: 18rem;">
+	{# <img src="{{ project.customer.logo }}" class="card-img-top" alt="..."> #}
+	<div class="card-body">
+		<h5 class="card-title text-center">{{ project.name }}</h5>
+	</div>
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item">Lancement :
+			{{ project.createdAt|date("d/m/Y") }}</li>
+		<li class="list-group-item">Client :
+			{{ project.customer ? project.customer.companyName : "" }}</li>
+		<li class="list-group-item">Agence Apside :
+			{{ project.agency ? project.agency.name : "" }}</li>
+		<li class="list-group-item">Statut : {{ project.controlPoint.name }}</li>
+		<li class="list-group-item">
+    Catégorie(s) : 
+			<ul>
+				{% for category in project.category %}
+					<li class="list-group-item">{{ category.name }}</li>
+				{% endfor %}
+			</ul>
+		</li>
+		<li class="list-group-item">Méthode utilisée : {{ project.method.name }}</li>
+	</ul>
+	<div class="card-body text-center">
+		<a href="{{ path('app_project_show', {'id': project.id}) }}" class="card-link">Plus d'infos</a>
+	</div>
+</div>

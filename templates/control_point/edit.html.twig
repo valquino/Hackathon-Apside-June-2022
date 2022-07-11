@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ControlPoint{% endblock %}
+
+{% block body %}
+    <h1>Edit ControlPoint</h1>
+
+    {{ include('control_point/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_control_point_index') }}">back to list</a>
+
+    {{ include('control_point/_delete_form.html.twig') }}
+{% endblock %}

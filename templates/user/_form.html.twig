@@ -1,0 +1,76 @@
+<h1 class="text-center">Edition de vos informations</h1>
+
+
+{{ form_start(form, {attr: {'novalidate': 'novalidate'}}) }}
+{{ form_errors(form) }}
+
+{# {{
+    form_row(form.password, {
+        label: "Password"
+    })
+}} #}
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 pt-5">
+                <span class="font-weight-bold fst-italic mt-5">Bonjour, {{ user.firstname }}</span>
+                <img class="rounded-circle mt-2" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                {% for key, role in roles %}
+                    {% if role is same as(user.roles[0]) %}
+                        <h3><span class="badge bg-secondary">{{ key }}</span></h3>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="text-center">
+                <a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn bg-principal-orange" type="button"><i class="bi bi-backspace-fill"></i> Retour</a>
+            </div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <h4 class="text-center pb-3"><i class="bi bi-credit-card-2-front pe-1"></i> Vos données modifiables</h4>
+                <div class="row mt-2">
+                    <div class="col-md-6 my-1"><label class="labels">Nom</label>{{ form_row(form.lastname) }}</div>
+                    <div class="col-md-6 my-1"><label class="labels">Prénom</label>{{ form_row(form.firstname) }}</div>
+                </div>
+                <hr class="my-4" />
+                <div class="row mt-3">
+                    <div class="col-md-12 my-1"><label class="labels">Email</label>{{ form_row(form.email) }}</div>
+                    <div class="col-md-12 my-1"><label class="labels">Numéro de téléphone</label><input type="text" class="form-control" placeholder="06 xx xx xx xx" value=""></div>
+                    <div class="col-md-12 my-1"><label class="labels">Mot de passe</label>{{ form_row(form.password) }}</div>
+                </div>
+                <hr class="my-4" />
+                <div class="row mt-3">
+                    <div class="col-md-6 my-1"><label class="labels">Job</label>
+                        {{ form_row(form.job) }}
+                    </div>
+                    <div class="col-md-6 my-1"><label class="labels">Agence</label>
+                        {{ form_row(form.agency) }}
+                    </div>
+                    <div class="col-md-6 my-1"><label class="labels">Role</label>
+                        {{ form_row(form.roles) }}
+                    </div>
+                </div>
+                <div class="mt-5 text-center">
+                    <button type="submit" class="btn bg-principal-orange"><i class="bi bi-pencil-square"></i> Mettre à jour</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+                <h4 class="text-center"><i class="bi bi-plus-square-dotted pe-1"></i> Votre disponibilité</h4>
+                <div class="alert alert-light text-center" role="alert">
+                    En indiquant que vous êtes disponible, vous autorisez les agences du réseau à vous proposer des missions.
+                </div>
+                <div>
+                    {{ form_row(form.isAvailable) }}
+                </div>
+            </div>
+            <div class="alert alert-warning text-center" role="alert">
+                <span class="smalltext">Certaines de vos données personnelles ne sont pas modifiables. Telles que votre identité, votre job, votre agence et votre role.
+                <br />Vous devez vous rapprocher de votre gestionnaire d'agence si vous souhaitez les modifier.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ form_end(form) }}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search results
+{% endblock %}
+
+{% block body %}
+	<h1 class="my-4 text-center">Résultats - Projet(s)</h1>
+	<div class="d-flex flex-wrap">
+		{% for project in projects %}
+			{% include 'layouts/_project-card.html.twig' %}
+		{% endfor %}
+	</div>
+{% endblock %}

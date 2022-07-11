@@ -1,0 +1,11 @@
+.btn1 {
+    border: solid 1px black;
+}
+
+.description-text{
+    text-justify: auto;
+}
+
+h2, h3, h4{
+    color:rgb(3, 3, 95);
+}

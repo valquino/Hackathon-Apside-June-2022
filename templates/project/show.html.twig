@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project{% endblock %}
+
+{% block body %}
+    <div class="container border border-dark pt-4 mt-5 rounded ">
+        <div class="d-flex justify-content-between">
+            <h2 class="text-center">{{ project.name }}</h2>
+            <h3>Lancement du projet : {{ project.createdAt|date("d/m/Y") }}</h3>
+        </div>
+        <div class="d-flex justify-content-between">
+            <h4 class="pb-3">Société cliente : {{ project.customer.companyName }}</h4>
+
+        </div>
+        <div class="end-0 gap-5">
+			<ul class="d-flex ps-0 gap-2 mb-1">
+                Catégorie(s) : 
+				{% for category in project.category %}
+					<li class="list-group-item">{{ category.name }}</li>
+				{% endfor %}
+			</ul>
+            <p class="mb-1">Statut : {{ project.controlPoint.name }}</p>
+            <div class="pb-4">Méthode utilisée : {{ project.method.name }}</div>
+        </div>
+        <div>   
+            <p>
+                <a class="btn1 btn btn-light" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Description du projet</a>
+            </p>
+            <div class="row">
+                <div class="col">
+                  <div class="collapse multi-collapse" id="multiCollapseExample1">
+                    <div class="card card-body">
+                        <p class="description-text">{{ project.description }}</p>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex gap-5">
+        <a class="btn1 btn btn-light" href="{{ path('app_project_index') }}">Retour à mes projets</a>
+
+        <a class="btn1 btn btn-light" href="{{ path('app_project_edit', {'id': project.id}) }}">Mettre à jour mon projet</a>
+        
+        <a >{{ include('project/_delete_form.html.twig') }}</a>
+
+    </div>
+
+
+{% endblock %}

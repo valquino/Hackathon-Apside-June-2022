@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    {# {{ dump(user) }} #}
+    <h1 class="text-center">Vos informations</h1>
+    <div class="container rounded bg-white mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 pt-5">
+                    <span class="font-weight-bold fst-italic mt-5">Bonjour, {{ user.firstname }}</span>
+                    <img class="rounded-circle mt-2" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                    {% for key, role in roles %}
+                        {% if role is same as(user.roles[0]) %}
+                            <h3><span class="badge bg-secondary">{{ key }}</span></h3>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="text-center">
+                    <a href="{{ path('app_user_index') }}" class="btn bg-principal-orange" type="button"><i class="bi bi-backspace"></i> Retour</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn bg-principal-orange" type="button"><i class="bi bi-pencil-square"></i> Editer</a>
+                </div>
+            </div>
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    <h4 class="text-center pb-3"><i class="bi bi-credit-card-2-front pe-1"></i> Gestion de votre profil</h4>
+                    <div class="row mt-2">
+                        <div class="col-md-6 my-1"><label class="labels">Nom</label><input type="text" class="form-control" placeholder="nom" value="{{ user.lastname }}" readonly="readonly"></div>
+                        <div class="col-md-6 my-1"><label class="labels">Prénom</label><input type="text" class="form-control" value="{{ user.firstname }}" placeholder="prénom" readonly="readonly"></div>
+                    </div>
+                    <hr class="my-4" />
+                    <div class="row mt-3">
+                        <div class="col-md-12 my-1"><label class="labels">Numéro de téléphone</label><input type="text" class="form-control" placeholder="Votre numéro de téléphone" value="" readonly="readonly"></div>
+                        <div class="col-md-12 my-1"><label class="labels">Email</label><input type="text" class="form-control" placeholder="Entre votre email" value="{{ user.email }}" readonly="readonly"></div>
+                    </div>
+                    <hr class="my-4" />
+                    <div class="row mt-3">
+                        <div class="col-md-6 my-1"><label class="labels">Job</label>
+                            <select id="job" class="form-control" disabled>
+                                {% for job in user.job %}
+                                    <option value="{{ job.name }}" selected>{{ job.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6 my-1"><label class="labels">Agence</label>
+                            <select id="agency" class="form-control" disabled>
+                                {% for agency in agencies %}
+                                    {% set selected = '' %}
+                                    {% if user.agency.name is same as(agency.name) %}
+                                        {% set selected = 'selected' %}
+                                    {% endif %}
+                                    <option value="{{ agency.name }}" {{ selected }}>{{ agency.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        {# <div class="col-md-6 my-1"><label class="labels">Role</label>
+                            <select id="role" class="form-control" disabled>
+                                {% for key, role in roles %}
+                                    {% set selected = '' %}
+                                    {% if user.roles is same as(role) %}
+                                        {% set selected = 'selected' %}
+                                    {% endif %}
+                                    <option value="{{ role }}" {{ selected }}>{{ role }}</option>
+                                {% endfor %}
+                            </select>
+                        </div> #}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 py-5">
+                    <h4 class="text-center"><i class="bi bi-plus-square-dotted pe-1"></i> Votre disponibilité</h4>
+                    <div class="alert alert-light text-center" role="alert">
+                        En indiquant que vous êtes disponible, vous autorisez les agences du réseau à vous proposer des missions.
+                        <hr />
+                        {% if user.isAvailable is same as(true) %}
+                            <div class="align-middle available">
+                                <label class="labels">Vous avez indiqué être</label>
+                                <div class="color-principal-orange fw-bold fs-5 ">
+                                    <i class="bi bi-check2-circle fw-bolder fs-3 pe-1 align-middle"></i> Disponible
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="align-middle noavailable">
+                                <label class="labels">Vous avez indiqué être</label>
+                                <div class="color-red fw-bold fs-5">
+                                    <i class="bi bi-slash-circle fw-bolder fs-3 pe-1 align-middle"></i> Indisponible
+                                </div>
+                                <label class="labels">Aucune mission en dehors de celles de votre agence ne vous sera proposée</label>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">{{ include('user/_delete_form.html.twig') }}</div>
+{% endblock %}
